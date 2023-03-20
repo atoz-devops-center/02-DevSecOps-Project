@@ -49,3 +49,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=atoz-devops-center_02-DevSecOps-Project
+
+      - uses: snyk/actions/setup@master
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.17.0'
+      - run: chmod +x mvnw
+      - name: Snyk monitor
+        run: snyk test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
