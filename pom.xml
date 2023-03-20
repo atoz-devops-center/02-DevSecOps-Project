@@ -17,6 +17,9 @@
 		<java.version>17</java.version>
 		<sonar.organization>atoz-devops-center</sonar.organization>
  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<jacoco.version>0.8.8</jacoco.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,6 +44,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+				  <execution>
+				    <goals>
+				      <goal>prepare-agent</goal>
+				    </goals>
+				  </execution>
+				  <execution>
+				    <id>report</id>
+				    <phase>prepare-package</phase>
+				    <goals>
+				      <goal>report</goal>
+				    </goals>
+				  </execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
