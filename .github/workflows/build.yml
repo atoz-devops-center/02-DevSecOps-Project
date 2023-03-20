@@ -34,19 +34,19 @@ jobs:
      
       - name: Run Tests
         run: |
-          ./mvnw clean test
+          mvn clean test
 
       - name: Run tests and generate code coverage report
-        run: ./mvnw verify
+        run: mvn verify
 
       - name: Upload code coverage report
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage
           path: target/site/jacoco/index.html
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=atoz-devops-center_02-DevSecOps-Project
+#       - name: Build and analyze
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         run: |
+#           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=atoz-devops-center_02-DevSecOps-Project
